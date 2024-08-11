@@ -1,11 +1,41 @@
 <% layout("/layouts/boilerplate")-%>
 <body>
+<div class="row ">
+    <div class="col-8 offset-2">
     <form action="/listings" method="post">
-        <input type="text" name="listing[title]" placeholder="villa">
-        <input type="text" name="listing[description]" placeholder="top view of the mountain">
-        <input type="number" name="listing[price]" placeholder="8900">
-        <input type="text" name="listing[location]" placeholder="mumbai">
-        <input type="text" name="listing[country]" placeholder="india">
-        <button>create</button>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="listing[title]" placeholder="roudetra villa">
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" rows="2" name="listing[description]"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="text" class="form-control" name="listing[image]" placeholder="/pixal/40540/villa-3949/03">
+          </div>
+         
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" name="listing[location]" placeholder="kerla">
+          </div>
+          <div class="row">
+            <div class="col-6">
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" name="listing[price]" placeholder="73000">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" name="listing[country]" placeholder="india">
+          </div>
+        </div>
+        </div>
+        <button class=" btn btn-dark create-btn">create</button>
     </form>
+</div>
+</div>
 </body>

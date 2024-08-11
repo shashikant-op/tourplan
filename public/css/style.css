@@ -163,4 +163,9 @@ border-radius: 5px;
 .main-listing button:hover{
     background-color: rgb(26, 173, 173);
 }
+/* btn */
+.create-btn{
+    background-color: teal !important;
+    margin-top: 1rem !important;
+}
 
