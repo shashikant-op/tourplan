@@ -1,11 +1,41 @@
 <%layout("/layouts/boilerplate")-%>
 <body>
-    <form method="POST" action="/listings/<%=details._id%>?_method=put" >
-        <input type="text" value="<%=details.description%>" name="description">
-        <input type="number" value="<%=details.price%>" name="price">
-        <input type="text" value="<%=details.location%>" name="location">
-        <input type="text" value="<%=details.country%>" name="country">
-      <button>update</button>  
+  <div class="row ">
+    <div class="col-8 offset-2">
+    <form action="/listings" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="listing[title]" value="<%=details.title%>" >
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="listing[description]"  ><%=details.description%></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="text" class="form-control" name="listing[image]"  value="<%=details.image%>" >
+          </div>
+         
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" name="listing[location] "  value="<%=details.location%>">
+          </div>
+          <div class="row">
+            <div class="col-6">
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" name="listing[price]"  value="<%=details.price%>" >
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" name="listing[country]"  value="<%=details.country%>" >
+          </div>
+        </div>
+        </div>
+        <button class=" btn btn-dark create-btn">create</button>
     </form>
-    
+</div>
+</div>
 </body>
