@@ -1,0 +1,11 @@
+<%layout("/layouts/boilerplate")-%>
+<body>
+    <form method="POST" action="/listings/<%=details._id%>?_method=put" >
+        <input type="text" value="<%=details.description%>" name="description">
+        <input type="number" value="<%=details.price%>" name="price">
+        <input type="text" value="<%=details.location%>" name="location">
+        <input type="text" value="<%=details.country%>" name="country">
+      <button>update</button>  
+    </form>
+    
+</body>

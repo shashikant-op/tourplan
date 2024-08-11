@@ -1,0 +1,166 @@
+body {
+    background-color: pink;
+}
+/* home page */
+/* styles.css */
+
+/* navbar */
+
+
+.navbar{
+    height: 5rem !important;
+  padding-left: 10px !important;
+  margin-bottom: 20px;
+}
+.main-content{
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+}
+
+/* //footer// */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.main-footer {
+    background-color: #f8f9fa; /* Optional: add background color */
+    text-align: center; /* Optional: center the text */
+    /* padding: 10px 0; */
+}
+
+.main-footer footer {
+    margin-top: auto;
+}
+/* footer end */
+footer{
+
+background-color: red;
+color: white;
+text-align: center;
+}
+.nav-link{
+    color: #222222 !important;
+}
+.nav-link:hover{
+    color: teal !important;
+   
+}
+
+
+header {
+    background-color: #4d2c2c;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    font-size: 2em;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+.hotel-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+    background-color: #fff;
+    padding: 1em;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hotel-details .content {
+    flex: 1;
+    padding: 1em;
+}
+
+.hotel-details .image {
+    flex: 1;
+    text-align: center;
+}
+
+.hotel-details .image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 0.5em;
+}
+
+.contact-details {
+    text-align: center;
+    background-color:rgb(128, 128, 128);
+    color: #fff;
+    padding: 2em;
+    margin-top: 2em;
+    border-top: 1px solid #ddd;
+}
+
+footer {
+    text-align: center;
+    padding: 1em 0;
+    background-color:teal;
+    color: #fff;
+    font-size: 0.9em;
+}
+.content h2{
+    color: teal;
+}
+/* //for button */
+.btn-long-visit {
+    display: inline-block;
+    padding: 0.75em 1.5em;
+    margin-top: 1em;
+    color: #fff;
+    background-color:teal;
+    text-decoration: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-long-visit:hover {
+    background-color:rgb(19, 174, 174);
+    transform: translateX(10px);
+}
+.main-listing{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+}
+.main-listing button{
+   list-style: none;
+   background-color: teal;
+   color: white;
+   font-style: none;
+   border: none;
+   padding: 10px 40px 10px;
+border-radius: 5px;
+
+}
+.main-listing button a{
+    list-style: none;
+    font-style: normal;
+}
+.main-listing button:hover{
+    background-color: rgb(26, 173, 173);
+}
+
