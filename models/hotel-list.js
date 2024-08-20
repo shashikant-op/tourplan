@@ -9,6 +9,17 @@ const hotel_listSchema =new mongoose.Schema({
     type:String,
     required:true,
    },
+   price:{
+      type:Number,
+      required:true,
+   },
+     location:{
+      type:String,
+   },
+     country:{
+      type:String,
+      required:true,
+     },
    image:{
     type:String,
     default:"https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?cs=srgb&dl=dug-out-pool-hotel-pool-1134176.jpg&fm=jpg",
@@ -17,17 +28,7 @@ const hotel_listSchema =new mongoose.Schema({
         ?"https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?cs=srgb&dl=dug-out-pool-hotel-pool-1134176.jpg&fm=jpg"
         :v,
    },
-   price:{
-    type:Number,
-    required:true,
-   },
-   location:{
-    type:String,
-   },
-   country:{
-    type:String,
-    required:true,
-   }
+   
 
    
 })

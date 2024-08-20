@@ -169,3 +169,33 @@ border-radius: 5px;
     margin-top: 1rem !important;
 }
 
+/* //show pages */
+.card-img-top{
+    height: 20rem !important;
+  
+}
+.btn{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+}
+.c{
+    border: none !important;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.c_l{
+    text-decoration: none !important;
+}
+.c_t{
+    width: 100% ;
+    border-radius: 1rem !important;
+    object-fit: cover !important;
+
+}
+.c_b{
+    padding: 0 !important;
+}
+.card_1_text{
+    font-weight: 500 !important;
+}
