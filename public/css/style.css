@@ -6,7 +6,9 @@ body {
 
 /* navbar */
 
-
+.container{
+    flex:1 !important;
+}
 .navbar{
     height: 5rem !important;
   padding-left: 10px !important;
@@ -170,32 +172,61 @@ border-radius: 5px;
 }
 
 /* //show pages */
-.card-img-top{
-    height: 20rem !important;
-  
+.show-img{
+    height: 30vh;
+}
+.btn-1{
+    display: flex;
+   flex-wrap: wrap;
+    width: 100%;
+    
+}
+.a-btn{
+    text-decoration: none !important;
+   color: white !important;
+}
+.btnn{
+    display: flex;
+
+}
+.btn-1{
+background-color: #fe424d !important;
+border: none !important;
+}
+.btn1{
+    margin-right: 5vh;
+    margin-left: 5vh;
+}
+.btn2{
+    background-color: rgb(224, 47, 47) !important;
+    border: none !important;
 }
 .btn{
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
 }
-.c{
-    border: none !important;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+.btn-teal{
+    background-color: teal !important;
 }
-.c_l{
+
+.card{
+    border: none !important;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.card-link{
     text-decoration: none !important;
 }
-.c_t{
+.card-img-top{
     width: 100% ;
-    border-radius: 1rem !important;
+    border-radius: 12px !important;
     object-fit: cover !important;
 
 }
-.c_b{
+.card-body{
     padding: 0 !important;
 }
-.card_1_text{
+.card-text{
     font-weight: 500 !important;
 }

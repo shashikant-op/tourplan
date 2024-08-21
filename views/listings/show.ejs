@@ -1,35 +1,56 @@
-<%layout("/layouts/boilerplate")-%>
+<% layout("layouts/boilerplate") %>
 <body>
-    <!-- <h2>details of : <%=details.title %></h2>
-    <p><%=details.description%></p>
-    <p>price: &#8377;<%=details.price.toLocaleString("en-IN")%></p>
-    <p>location:<%=details.location%></p> -->
-    <div class="row ">
-        <div class="col-8 offset-2">
-        <div class="card mb-3 ">
-        <img src="<%=details.image %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%=details.title%></h5>
-          <p class="card-text"><%=details.description %></p>
-          <p class="card-text"><small class="text-body-secondary"><%=details.price %></small></p>
+    <div class="row"><br><br>
+        <div class="col-6 offset-3">
+            <h2><%= details.title%></h2><br>
         </div>
-      </div>
-      </div>
-      <div class="row">
-            <div class="col-6 offset-3">
-                <div class="btn">
-                    <form action="/listings/edit/<%=details.id%>">
-                   <button class="btn btn-primary">edit</button>
-               </form>
-               <form action="/listings/<%=details.id%>?_method=delete" method="post">
-                   <button  class="btn btn-warning">delete</button>
-               </form>
-                 </div>
+        
+        <div class="col-6 offset-3">
+            <div class="card">
+                <img src="<%=details.image%>" alt="listing image" class="card-img-top show-img">
             </div>
-      
-     
-   
-    </div>
-</div>
+            <div class="card-body">
+                <p class="card.text">
+                    <b><%=details.title%></b><br><br>
+                    <%=details.description%> <br>
+                    <%=details.wood%> <br>
+                    <%=details.warrenty%> <br>
+                    <%=details.category%> <br>
+                    <%=details.subcateg%> <br>
+                    &#8377; <%=details.price.toLocaleString("en-IN");%> <br>
+                </p>
+            </div>
+            
+            </div>
+        </div>
+    </div><br><br>
+    <div class="row">
+        <div class="btnn col-6 offset-3">
+             <div class="btn1">
+                <button class=" btn btn-teal"><a href="/listings/edit/<%=details._id%>" class="a-btn">Edit</a></button>
+            </div>
+            <div >
+                <form method="post" action="/listings/<%=details._id%>?_method=delete">
+                    <Button class="btn btn-dark btn2 ">Delete </Button>
+                </form>
+         
+        </div>
+        </div>
+           
+    </div><br><br>
+
+    <!-- <ul>
+        <li><%= details.title %></li>
+    
+        <li><%= details.description %></li>
+        <li><%= details.image %></li>
+        <li><%= details.wood %></li>
+        <li><%= details.price %></li>
+        <li><%= details.warranty %></li>
+
+    </ul>  
+      <a href="/listings/<%=details._id%>/edit">edit details</a>
+    <a href="/listings/<%=details._id%>/delete">delete listing</a> -->
+    
     
 </body>
