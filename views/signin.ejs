@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    
+    <style>
+         *{
+            margin: 0;
+            padding: 0;
+           
+        }
+        h3{
+            margin-bottom: 15px;
+        }
+        button{
+            margin-top: 60px;
+            border:none;
+            padding: 8px 12px 8px 12px;
+            color: aquamarine;
+            background-color: teal;
+            border-radius: 5px 5px 5px 5px;
+        }
+        .main{
+            display: flex;
+            width:400px;
+            height: 550px;
+            align-items:center; 
+            justify-content: center; 
+            padding-bottom:0;
+            margin-top: 68px; 
+            background-color: rgba(109, 226, 187, 0.992); 
+            margin-left: 10px;
+           border-radius:  18% 18% 0 0   ;
+           box-shadow: 0 0 25px 2px  rgba(109, 226, 187, 0.992);
+           
+        }
+        .btn{
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        input{
+          border-style: none;
+          background-color: transparent;
+         height: 18px;
+        border-bottom: 1px solid black;
+        outline-style: none;
+        }
+        h2{
+            color:#ed5561;
+            display: flex;
+            
+            margin-left: 30px;
+            
+        }
+        .header{
+            display: flex;
+            margin-top: 50px;
+            margin-top: 130px;
+            margin-left: 50px;
+            padding-left: 80px;
+        }
+        .pic2{
+            width: 40vw;
+            height: 40vw;
+        }
+        .container{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="header"><h2> WELCOME IN Tech detector</h2></div>
+    <div class="container">
+<div class="main">
+          <form method="post" action="/login/profile?_method=PATCH">
+        <h3>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="gmail" placeholder="shashikant@gmail.com"></h3>
+<h3>password:&nbsp;<input type="password" name="userpassword" placeholder="3sgvhbaj"></h3>
+<div class="btn">
+   <button>LOG-IN</button> 
+   </form>
+</div>
+    </div>
+    <img class="pic2" src="https://www.nexuslab.net/heroImg/webdev.png" alt="img2">
+    
+
+
+
+    
+    </div>
+  
+    
+
+    
+</body>
+</html>

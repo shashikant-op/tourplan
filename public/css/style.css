@@ -230,3 +230,6 @@ border: none !important;
 .card-text{
     font-weight: 500 !important;
 }
+.ml-2{
+margin-left: 20px !important;
+}
