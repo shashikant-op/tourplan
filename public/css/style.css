@@ -233,3 +233,28 @@ border: none !important;
 .ml-2{
 margin-left: 20px !important;
 }
+
+/* //navbar */
+
+.nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.navbar{
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+}
+.prfimag img{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    border: 2px solid teal;
+
+}
+.prof{
+    display: flex;
+    flex-direction: row !important;
+    margin-left: 30px;
+    
+}

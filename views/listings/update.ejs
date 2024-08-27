@@ -1,40 +1,52 @@
 <%layout("/layouts/boilerplate")-%>
 <body>
-  <div class="row ">
+  <div class="row mb-3">
     <div class="col-8 offset-2">
-    <form action="/listings" method="post">
+    <form action="/listings/update/<%=details._id%>?_method=put" method="post" novalidate class="needs-validation">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" name="listing[title]" value="<%=details.title%>" >
+            <input type="text" class="form-control" name="listing[title]" value="<%=details.title%> " required>
+            <div class="invalid-feedback">Title should be valid</div>
+            <div class="valid-feedback">Title is good</div>
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" name="listing[description]"  ><%=details.description%></textarea>
+            <textarea class="form-control" name="listing[description]"  required><%=details.description%></textarea>
+            <div class="invalid-feedback">Description must be added</div>
+            <div class="valid-feedback">Well describe good job!</div>
           </div>
           <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control" name="listing[image]"  value="<%=details.image%>" >
+            <input type="text" class="form-control" name="listing[image]"  value="<%=details.image%>" required >
+            <div class="invalid-feedback">Image should be valid</div>
+            <div class="valid-feedback">Image to be added</div>
           </div>
          
           <div class="mb-3">
             <label for="location" class="form-label">Location</label>
-            <input type="text" class="form-control" name="listing[location] "  value="<%=details.location%>">
+            <input type="text" class="form-control" name="listing[location] "  value="<%=details.location%>" required>
+            <div class="invalid-feedback">Location should be valid</div>
+            <div class="valid-feedback">Well located</div>
           </div>
           <div class="row">
             <div class="col-md-8">
           <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" name="listing[price]"  value="<%=details.price%>" >
+            <input type="number" class="form-control" name="listing[price]"  value="<%=details.price%>" required >
+            <div class="invalid-feedback">Price should be valid</div>
+            <div class="valid-feedback">Price is good</div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="mb-3">
             <label for="country" class="form-label">Country</label>
-            <input type="text" class="form-control" name="listing[country]"  value="<%=details.country%>" >
+            <input type="text" class="form-control" name="listing[country]"  value="<%=details.country%>" required>
+            <div class="invalid-feedback">Country name is reqired</div>
+            <div class="valid-feedback">Amazing country</div>
           </div>
         </div>
         </div>
-        <button class=" btn btn-dark create-btn">create</button>
+        <button class=" btn btn-dark create-btn">update</button>
     </form>
 </div>
 </div>

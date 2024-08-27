@@ -4,7 +4,8 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="nav">
+         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/home">Home</a>
@@ -12,15 +13,27 @@
           <li class="nav-item">
             <a class="nav-link" href="/listings/new">create new list</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/profile"><%=username%></a>
-           
-          </li>
+          
           <li>
             <a class="nav-link" href="/logout">logout</a>
           </li>
           
         </ul>
       </div>
+      <div class="profile">
+        <li class="nav-item">
+          <div class="prof">
+            <a class="nav-link" href="/profile" style="color: teal !important ; border-bottom: 1px solid teal;"><%=username%></a>
+            <div class="prfimag">
+              <a href="/profile"><img src="https://th.bing.com/th/id/OIP.JdAF9MkfYA92m1ocasMFJQHaHl?rs=1&pid=ImgDetMain" alt=""></a>
+            </div>
+           
+          </div>
+          
+         
+        </li>
+      </div>
+      </div>
+     
     </div>
   </nav>
