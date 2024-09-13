@@ -1,5 +1,4 @@
 const express = require("express");
-const Expresserr = require("./expresserr");
 const app = express();
 const ejs = require("ejs");
 const mongoose = require("mongoose");
@@ -9,6 +8,9 @@ const methodoverride = require("method-override");
 const ejsMate = require('ejs-mate');
 app.engine("ejs", ejsMate);
 app.use(methodoverride("_method"));
+const wrapasync=require("./utlis/wrapasync.js");
+const Expresserr=require("./utlis/expresserr.js");
+const {listingschema}=require("./schemavalidation.js");
 
 
 app.use(express.static(path.join(__dirname, "/public")));
@@ -27,19 +29,6 @@ async function main() {
 }
 
 
-
-//async errhandling
-
-function wrapasync(fn){
-    return function(req,res,next){
-        fn(req,res,next).catch((err)=>{
-            console.log("wrapasync  is work");
-            console.log(err);
-            res.send(err);
-            next(err);
-        })
-    }
-}
 
 
 
@@ -64,6 +53,21 @@ connection.query(q, (err, result) => {
     if (err) throw err;
     console.log("sucess");
 });
+
+
+//listing valdation
+
+const validatelisting=(req,res,next)=>{
+    let{error}=listingschema.validate(req.body);
+    if(error){
+        let errmsg=error.details.map((el)=>el.message).join(",");
+        throw new Expresserr(400,errmsg);
+        
+    }
+    else{
+        next();
+    }
+}
 
 
 //making route
@@ -172,7 +176,9 @@ app.get("/listings/show/:id", wrapasync(async (req, res) => {
 app.get("/listings/new", (req, res) => {
     res.render("listings/new.ejs", { username });
 })
-app.post("/listings", wrapasync(async (req, res) => {
+
+//create route
+app.post("/listings", validatelisting,wrapasync(async (req, res) => {
     const newlisting = new hotellisting(req.body.listing);
     await newlisting.save();
     console.log(req.body.listing);
@@ -204,32 +210,37 @@ app.delete("/listings/:id", wrapasync(async (req, res) => {
     res.redirect("/listings");
 }))
 
-app.use("*",(req,res)=>{
-res.send("page is not found");
+app.use("*",(req,res,next)=>{
+next(new Expresserr(400,"page not found"));
+
 })
 
 
-const handlevalidationerr = (err) => {
-    console.log("This was a validation error: please follow the rules");
-    console.dir(err);
-    return new Error("Validation failed. Please check your input.");
-};
+// const handlevalidationerr = (err) => {
+//     console.log("This was a validation error: please follow the rules");
+//     console.dir(err);
+//     return new Error("Validation failed. Please check your input.");
+// };
 
 //err handling
 
-app.use((err, req, res, next) => {
-    if (err.name === "ValidationError") {
-        err = handlevalidationerr(err);
-    }
-    res.send(err.message);
-    next(err); // Make sure to call next() if not ending the response
-});
+// app.use((err, req, res, next) => {
+//     if (err.name === "ValidationError") {
+//         err = handlevalidationerr(err);
+//     }
+//     res.send(err.message);
+//     next(err); // Make sure to call next() if not ending the response
+// });
 
 
 
 app.use((err, req, res, next) => {
-    console.log(err);
-    res.status(500).send("Something went wrong!");
+    let{statuscode,message}=err;
+   
+    res.render("error.ejs",{username,err});
+    console.log(statuscode);
+    console.log(message);
+    console.log("expresserr triggerd");
 });
 
 app.listen(8080, () => {
