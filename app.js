@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const ejs = require("ejs");
 const mongoose = require("mongoose");
-const hotellisting = require("./models/hotel-list");
 const path = require("path");
 const methodoverride = require("method-override");
 const ejsMate = require('ejs-mate');
@@ -10,8 +9,22 @@ app.engine("ejs", ejsMate);
 app.use(methodoverride("_method"));
 const wrapasync=require("./utlis/wrapasync.js");
 const Expresserr=require("./utlis/expresserr.js");
-const {listingschema}=require("./schemavalidation.js");
+const listingrouter=require("./routes/listings.js");
+const reviewrouter=require("./routes/reviews.js");
+const session=require("express-session");
+const flash=require("connect-flash");
+// const cookie=require("cookie");
 
+const sessionobject={
+    secret:"mysecretcode",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+7*24*60*60*1000,
+        maxage:7*24*60*60*1000,
+        httponly:true,
+    }
+}
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.set("view engine", "ejs");
@@ -28,222 +41,38 @@ async function main() {
     mongoose.connect('mongodb://127.0.0.1:27017/hotel-list');
 }
 
+app.use(session(sessionobject));
+app.use(flash());
 
 
 
 
-//authentication
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    next();
+})
 
-const mysql = require("mysql2");
-
-
-
-const connection = mysql.createConnection(
-    {
-        host: "localhost",
-        user: "root",
-        database: "app",
-        password: "Mysql12"
-
-    }
-);
-
-let q = `select*from users`;
-connection.query(q, (err, result) => {
-    if (err) throw err;
-    console.log("sucess");
-});
-
-
-//listing valdation
-
-const validatelisting=(req,res,next)=>{
-    let{error}=listingschema.validate(req.body);
-    if(error){
-        let errmsg=error.details.map((el)=>el.message).join(",");
-        throw new Expresserr(400,errmsg);
-        
-    }
-    else{
-        next();
-    }
-}
-
-
-//making route
 app.get("/", (req, res) => {
-    res.render("signup.ejs");
-})
-app.get("/login", (req, res) => {
-    isaunthenticated = false;
-    res.render("signin.ejs");
-
+    res.render("listings/home.ejs");
 
 })
 
-app.patch("/", (req, res) => {
-    let { mail: email, password: password, username: name, id: id } = req.body;
-    console.log(id);
-    let q = `insert into users values( "${id}","${name}","${email}","${password}")`;
-    connection.query(q, (err, result) => {
-        if (err) {
-            res.send(err.code);
-            console.log(err.code);
-
-        }
-        res.render("signin.ejs");
-
-    })
-})
-let username;
-let userid;
-
-let isaunthenticated = false;
-app.patch("/login/profile", (req, res) => {
-    let { gmail: usermail, userpassword: loginpassword } = req.body;
-    let q2 = `select*from users where email="${usermail}" `;
-
-    connection.query(q2, (err, result) => {
-
-        let user = result[0];
-        // cheking password 
-
-        let rpassword = result[0].password;
-        console.log(rpassword);
-        console.log(loginpassword);
-        if (rpassword === loginpassword) {
-            isaunthenticated = true;
-            username = user.name;
-            userid = user.id;
-            res.redirect("/home");
-        } else {
-            res.render("wrongpass.ejs");
-        }
+app.use("/listings",listingrouter);
+app.use("/listings/:id/review",reviewrouter);
 
 
-
-    })
-
-})
-
-
-console.log(username);
-
-app.use((req, res, next) => {
-    if (isaunthenticated) {
-        next();
-    }
-    else {
-        res.redirect("/login");
-    }
-})
-
-app.get("/logout", (req, res) => {
-    isaunthenticated = false;
-    res.redirect("/login");
-})
-app.get("/profile", (req, res) => {
-    let q2 = `select*from users where id="${userid}" `;
-    connection.query(q2, (err, result) => {
-        let user = result[0];
-        res.render("welcome.ejs", { user });
-    })
-
-
-})
-
-
-//main page
-app.get("/home", (req, res) => {
-    res.render("listings/home.ejs", { username });
-
-})
-
-
-//index route
-app.get("/listings", wrapasync(async (req, res) => {
-    const listings = await hotellisting.find({});
-    res.render("listings/index.ejs", { listings, username });
-
-}))
-//show route
-app.get("/listings/show/:id", wrapasync(async (req, res) => {
-    let { id } = req.params;
-    const details = await hotellisting.findById(id);
-    res.render("listings/show.ejs", { details, username });
-}))
-//new route
-app.get("/listings/new", (req, res) => {
-    res.render("listings/new.ejs", { username });
-})
-
-//create route
-app.post("/listings", validatelisting,wrapasync(async (req, res) => {
-    const newlisting = new hotellisting(req.body.listing);
-    await newlisting.save();
-    console.log(req.body.listing);
-    res.redirect("/listings");
-
-
-}))
-//edit route
-
-app.get("/listings/edit/:id", wrapasync(async (req, res) => {
-    let { id } = req.params;
-    let details = await hotellisting.findById(id);
-    res.render("listings/update.ejs", { details, username });
-}))
-//update route
-
-app.put("/listings/update/:id", wrapasync(async (req, res) => {
-    let { id } = req.params;
-    if (!req.body || !req.body.listing) {
-        throw new Error("Invalid input data");
-    }
-    await hotellisting.findByIdAndUpdate(id, { ...req.body.listing });
-    res.redirect("/listings");
-}));
-//delete route
-app.delete("/listings/:id", wrapasync(async (req, res) => {
-    let { id } = req.params;
-    await hotellisting.findByIdAndDelete(id);
-    res.redirect("/listings");
-}))
-
-app.use("*",(req,res,next)=>{
-next(new Expresserr(400,"page not found"));
-
-})
-
-
-// const handlevalidationerr = (err) => {
-//     console.log("This was a validation error: please follow the rules");
-//     console.dir(err);
-//     return new Error("Validation failed. Please check your input.");
-// };
-
-//err handling
-
-// app.use((err, req, res, next) => {
-//     if (err.name === "ValidationError") {
-//         err = handlevalidationerr(err);
-//     }
-//     res.send(err.message);
-//     next(err); // Make sure to call next() if not ending the response
-// });
-
-
-
-app.use((err, req, res, next) => {
-    let{statuscode,message}=err;
-   
-    res.render("error.ejs",{username,err});
-    console.log(statuscode);
-    console.log(message);
-    console.log("expresserr triggerd");
+app.use("*", (req, res, next) => {
+    next(new Expresserr(404, "Page not found"));  // Use 404 for not found errors
 });
 
-app.listen(8080, () => {
+// Error handling middleware
+app.use((err, req, res, next) => {
+    const { statuscode = 500, message = "Something went wrong" } = err;
+    res.status(statuscode).render("error.ejs", { err });
+});
 
-    console.log("app is listning on port 8080");
-})
+// Server listening on port 8080
+app.listen(8080, () => {
+    console.log("App is listening on port 8080");
+});

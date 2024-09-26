@@ -1,6 +1,9 @@
+const { types } = require("joi");
 const mongoose=require("mongoose");
+const Schema=mongoose.Schema;
+const review=require("./review.js");
 
-const hotel_listSchema =new mongoose.Schema({
+const hotel_listSchema =new Schema({
    title:{
     type:String,
     required:true,
@@ -28,6 +31,10 @@ const hotel_listSchema =new mongoose.Schema({
         ?"https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?cs=srgb&dl=dug-out-pool-hotel-pool-1134176.jpg&fm=jpg"
         :v,
    },
+   reviews:[{
+      type:Schema.Types.ObjectId,
+      ref:"review",
+   }]
    
 
    
