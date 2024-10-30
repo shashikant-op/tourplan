@@ -1,4 +1,70 @@
 <% layout("/layouts/boilerplate")-%>
+<style>
+    @media (max-width: 768px) {
+    .hotel-details {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hotel-details .content,
+    .hotel-details .image {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .hotel-details .content h2 {
+        font-size: 1.8rem;
+    }
+
+    .hotel-details .content a.btn-long-visit {
+        width: 80%;
+        padding: 12px 0;
+    }
+}
+
+/* Media Query for Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+    .hotel-details{
+        margin-bottom: 1rem;
+    }
+    main {
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    .hotel-details img{
+        width: 350px !important;
+        height: 300px;
+    }
+
+    .hotel-details .content h2 {
+        font-size: 1.5rem;
+    }
+
+    .hotel-details .content p {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    .hotel-details .content a.btn-long-visit {
+        width: 90%;
+        font-size: 0.9rem;
+        padding: 10px 0;
+    }
+
+    .contact-details h2 {
+        font-size: 1.4rem;
+    }
+
+    .contact-details p,
+    .contact-details a.btn-long-visit {
+        font-size: 0.9rem;
+    }
+}
+</style>
 <body>
     <main>
         <section class="hotel-details content1">

@@ -1,8 +1,72 @@
 <% layout("/layouts/boilerplate")-%>
+<style>
+  /* Tablet Devices (768px and below) */
+@media (max-width: 768px) {
+    .col-8 {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .offset-2 {
+        margin: 0;
+    }
+
+    .form-control {
+        padding: 8px;
+        font-size: 1rem;
+    }
+
+    .create-btn {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .new {
+        margin-top: 1.5rem;
+    }
+}
+
+/* Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+    .form-label {
+        font-size: 0.9rem;
+    }
+
+    .form-control {
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 1rem;
+    }
+
+    .create-btn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .new {
+        margin-top: 1rem;
+    }
+    
+    /* Adjust row layout for better stacking */
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .col-md-8, .col-md-4 {
+        width: 100%;
+    }
+}
+
+</style>
 <body>
 <div class="row new">
     <div class="col-8 offset-2">
-    <form action="/listings/create" method="post"  class="needs-validation" novalidate  >
+    <form action="/listings/create" method="post"  class="needs-validation" novalidate enctype="multipart/form-data"  >
         <div class="mb-3">
             <label for="title" class="form-label" >Title</label>
             <input 
@@ -26,13 +90,16 @@
           <div class="invalid-feedback">Description must be added</div>
             <div class="valid-feedback">Well describe good job!</div>
           </div>
+          
           <div class="mb-3">
             <label for="image" class="form-label" >Image</label>
             <input 
-            type="text" 
+            type="file" 
             class="form-control" 
             name="listing[image]" 
-            placeholder="/pixal/40540/villa-3949/03">
+            reqired 
+            >
+           
           </div>
          
           <div class="mb-3">

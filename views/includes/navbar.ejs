@@ -1,38 +1,135 @@
-<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+<style>
+.btn-search{
+  background-color: #fe424d;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 0 1.3rem 0 1rem;
+
+}
+.btn-search i{
+  display: inline; margin-right: .5rem;
+}
+.btn-search:hover{
+  background-color: #fe424d;
+  color: #fff;
+}
+.search-inp{
+  border-radius: 20px;
+  padding: 0.5rem 3rem 0.5rem 3rem;
+}
+
+@media (max-width: 480px){
+  
+  .glossy-background {
+    background: linear-gradient(
+        to bottom right,
+        rgba(0, 128, 128, 0.8),
+        rgba(0, 128, 128, 0.4)
+    ); /* Teal gradient for glossy effect */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+    border-radius: 12px;
+    padding: 20px;
+    color: #fff; /* Text color */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    backdrop-filter: blur(10px); /* Adds a blur effect */
+    position: relative;
+    overflow: hidden;
+}
+.serch{
+  margin-right: 0 !important;
+}
+.serch .btn-search span{
+  display: none;
+}
+
+/* Optional: Add a subtle shine effect */
+.glossy-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 150%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: skewX(-20deg);
+    transition: 1s;
+    filter: blur(10px);
+    opacity: 0.3;
+    animation: shine 3s infinite;
+}
+
+/* Keyframes for the animated shine effect */
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) skewX(-20deg);
+    }
+    100% {
+        transform: translateX(100%) skewX(-20deg);
+    }
+}
+.login{
+ margin-right: 1rem; 
+ align-items: flex-start;
+} 
+.nav-link{
+  color: white !important;
+}
+}
+
+</style>
+<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top  ">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">wonderlust</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" style="margin-left: auto; border: none;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="nav">
-         <div class="collapse navbar-collapse" id="navbarNav">
+      
+      <div class="nav ">
+         <div class="collapse collapse-nav navbar-collapse glossy-background" id="navbarNav" style="padding: 1rem 1rem 1rem 1rem; align-self: flex-start;">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/listings/new">create new list</a>
-          </li>
           
-          <li>
-            <a class="nav-link" href="/download">download</a>
+         
+          <div class="serch" style="margin-right: 15rem;">
+            <form class="d-flex">
+              <input 
+              class="form-control me-2 search-inp" 
+              type="search" 
+              placeholder="Search Destination" 
+              aria-label="Search">
+              <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></button>
+            </form>
+          </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/listings/new">wonderlust your home</a>
           </li>
+          <div class="profile">
+            <li class="nav-item">
+              <div class="prof">
+                <% if(curruser){ %>
+                  <div class="prfimag">
+                    <a href="/profile"><img src="https://th.bing.com/th/id/OIP.JdAF9MkfYA92m1ocasMFJQHaHl?rs=1&pid=ImgDetMain" alt=""></a>
+                  </div>
+                <a class="nav-link" href="/logout" style="color: teal ; margin-left: 0.7rem; border-bottom: 1px solid teal;">logout</a>
+                
+              <% } %>
+              <% if(!curruser){ %>
+                  <a class="nav-link login" href="/login" style="color:teal ; border-bottom: 1px solid teal;">login</a>
+                    <a class="nav-link" href="/signup" style="color: teal  ; border-bottom: 1px solid teal;">signup</a>
+                    <% } %>
+               
+              </div>
+              
+             
+            </li>
+          </div>
           
         </ul>
       </div>
-      <div class="profile">
-        <li class="nav-item">
-          <div class="prof">
-            <a class="nav-link" href="/profile" style="color: teal !important ; border-bottom: 1px solid teal;">username</a>
-            <div class="prfimag">
-              <a href="/profile"><img src="https://th.bing.com/th/id/OIP.JdAF9MkfYA92m1ocasMFJQHaHl?rs=1&pid=ImgDetMain" alt=""></a>
-            </div>
-           
-          </div>
-          
-         
-        </li>
-      </div>
+      
       </div>
      
     </div>

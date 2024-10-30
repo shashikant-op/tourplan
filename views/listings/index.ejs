@@ -1,15 +1,183 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+  .filters{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .filter{
+    display: flex;
+    flex-direction: column;
+    margin-right: 1.9rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  .btn-filter{
+    display: none;
+  }
+  .filter i{
+    font-size: 1.2rem;
+    
+  }
+  .filter:hover{
+    opacity: 1;
+  }
+  .tax-info{
+    display: none;
+  }
+  .tax-toggle{
+    height: 2.7rem;
+    border: 1px solid rgb(99, 99, 99);
+    border-radius: 10px;
+    padding: 0 1rem 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    .filters{
+  display: flex;
+ 
+  align-items: self-start;
+  margin-left: 1rem;
+  
+
+}
+.btn-filter{
+  display: inline;
+ border: none;
+ background-color: #fe424d;
+ color: white;
+ width: 5rem;
+ height: 2rem;
+ font-size: 1.2rem;
+ border-radius: 5rem;
+ margin-top: 0.3rem;
+ cursor: pointer;
+ 
+}
+.btn-filter:hover{
+  background-color: #ff2a38;
+  color: white;
+}
+.filter{
+  border: 1px solid teal;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  display: none ;
+  width: 8rem;
+}
+  }
+  @media (max-width: 480px){
+  .filters{
+  display: flex;
+ 
+  align-items: self-start;
+  margin-left: 1rem;
+  
+
+}
+.btn-filter{
+  display: inline;
+ border: none;
+ background-color: #fe424d;
+ color: white;
+ width: 5rem;
+ height: 2rem;
+ font-size: 1.2rem;
+ border-radius: 5rem;
+ margin-top: 0.3rem;
+ cursor: pointer;
+ 
+}
+.btn-filter:hover{
+  background-color: #ff2a38;
+  color: white;
+}
+.filter{
+  border: 1px solid teal;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  display: none ;
+  width: 8rem;
+}
+  }
+</style>
 <body>
+  <div class="filters">
+    
+    <div class="filter">
+      <i class="fa-solid fa-hotel"></i>
+      Hotel
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-fire"></i>
+     Trending
+    </div>
+    <div class="filter">
+    <i class="fa-solid fa-bed"></i>
+      Rooms
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-mountain-city"></i>
+      Mountain-city
+    </div>
+    <div class="filter">
+      <i class="fa-brands fa-fort-awesome"></i>
+     Castles
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-person-swimming"></i>
+      Swimming-pool
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-tractor"></i>
+      Farm
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-campground"></i>
+    Camp
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-igloo"></i>
+     Igloo
+    </div>
+    <div class="filter">
+      <i class="fa-regular fa-snowflake"></i>
+     Artec
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-person-swimming"></i>
+      Swimming-pool
+    </div>
+   
+    <div class="filter-btn">
+      <button type="check" class="btn-filter" id="filter-btn">Filters</button>
+    </div>
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display Total after Taxes</label>
+      </div>
+    </div>
+  </div>
+ 
+ 
+
     <div class="row row-cols-lg-5 row-cols-md-2  ">
         <% for( let listing of listings){%>
              <a href="/listings/show/<%=listing.id%>" class="card-link">
     <div class="card listing-card " >
-        <img class="card-img-top" src="<%=listing.image%>" alt="Card image cap" style="height: 18rem;">
+        <img class="card-img-top" src="<%=listing.image.url%>" alt="Card image cap" style="height: 18rem;">
         <div class="card-img-overlay"></div>
         <div class="card-body">
           <p class="card-text"> 
            <b><%=listing.title%></b> <br>
-           &#8377; <%=listing.price.toLocaleString("en-IN");%> <br>
+           &#8377; <%=listing.price.toLocaleString("en-IN");%> <span class="tax-info"><i>+18% GST</i></span> <br>
         </p>
 
         </div>
@@ -19,6 +187,34 @@
     </div>
    
 
-
+<script>
+  let toggle=document.getElementById("flexSwitchCheckDefault");
+  toggle.addEventListener("click",()=>{
+    let taxinfo=document.getElementsByClassName("tax-info");
+   
+    for(info of taxinfo){
+      if(info.style.display!="inline"){
+         info.style.display="inline";
+      }else{
+        info.style.display="none";
+      }
+     
+    }
+  })
+  let filterbtn=document.getElementById("filter-btn");
+  filterbtn.addEventListener("click",()=>{
+   let filter=document.getElementsByClassName("filter");
+   for(fil of filter){
+    if(fil.style.display!="inline"){
+    fil.style.display="inline";
+   }else{
+    fil.style.display="none";
+   }
+   }
+   
+  })
+  
+</script>
 </body> 
+
 

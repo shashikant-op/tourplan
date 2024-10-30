@@ -1,0 +1,74 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  /* Media query for tablets and smaller screens */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    .col-6 {
+        width: 80%; /* Make the card wider on smaller screens */
+    }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+
+    .col-6 {
+        width: 90%; /* Increase width on very small screens */
+      justify-self: left;
+      margin-left: 0%;
+    }
+
+    h3 {
+        font-size: 1.5rem; /* Adjust heading size */
+    }
+
+    .form-control {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px; /* Adjust button padding */
+        font-size: 1rem; /* Adjust button font size */
+    }
+}
+</style>
+<div class="row">
+    <h3 class="col-6 offset-3">signup</h3>
+    <div class="col-6 offset-3">
+        <form action="/Signup" method="post" novalidate>
+            <div class="mb-3">
+                <label for="gmail" class="form-label" >Email</label>
+                <input 
+                type="email" 
+                class="form-control" 
+                name="email" 
+                placeholder="Email" 
+                required>
+                <div class="invalid-feedback">Email should be valid</div>
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label" >Name</label>
+                <input 
+                type="text" 
+                class="form-control" 
+                name="username" 
+                placeholder="UserName" 
+                required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label" >Password</label>
+                <input 
+                type="password" 
+                class="form-control" 
+                name="password" 
+                placeholder="Password" 
+                required>
+                <div class="invalid-feedback">Password should be strong</div>
+              </div>
+              <button class="btn btn-success">Signup</button>
+        </form>
+    </div>
+</div>

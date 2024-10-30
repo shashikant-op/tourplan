@@ -24,17 +24,17 @@ const hotel_listSchema =new Schema({
       required:true,
      },
    image:{
-    type:String,
-    default:"https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?cs=srgb&dl=dug-out-pool-hotel-pool-1134176.jpg&fm=jpg",
-    set:(v) =>
-        v===""
-        ?"https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?cs=srgb&dl=dug-out-pool-hotel-pool-1134176.jpg&fm=jpg"
-        :v,
+    filename:String,
+    url:String,
    },
    reviews:[{
       type:Schema.Types.ObjectId,
       ref:"review",
-   }]
+   }],
+   owner:{
+      type:Schema.Types.ObjectId,
+      ref:"user",
+   }
    
 
    

@@ -1,8 +1,83 @@
 <%layout("/layouts/boilerplate")-%>
+<style>
+  /* Tablet Devices (768px and below) */
+@media (max-width: 768px) {
+    .col-8 {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .offset-2 {
+        margin: 0;
+    }
+
+    .form-control {
+        padding: 8px;
+        font-size: 1rem;
+    }
+
+    .create-btn {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .new {
+        margin-top: 1.5rem;
+    }
+}
+
+/* Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+    .form-label {
+        font-size: 0.9rem;
+    }
+
+    .form-control {
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 1rem;
+    }
+
+    .create-btn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .new {
+        margin-top: 1rem;
+    }
+    
+    /* Adjust row layout for better stacking */
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+    .originalimg img{
+      width: 350px !important;
+      height: 300px !important;
+      border-radius: 5px;
+    }
+
+    .col-md-8, .col-md-4 {
+        width: 100%;
+    }
+}
+
+</style>
 <body>
   <div class="row mb-3">
     <div class="col-8 offset-2">
-    <form action="/listings/update/<%=details._id%>?_method=put" method="post" novalidate class="needs-validation">
+    <form 
+      action="/listings/update/<%=details._id%>?_method=put" 
+      method="post" 
+      novalidate 
+      class="needs-validation"
+      enctype="multipart/form-data"
+      >
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" name="listing[title]" value="<%=details.title%> " required>
@@ -15,16 +90,21 @@
             <div class="invalid-feedback">Description must be added</div>
             <div class="valid-feedback">Well describe good job!</div>
           </div>
+          
+          <div class="mb-3 originalimg">
+            <p>original image</p>
+           <img style="width: 30rem; height: 20rem;" src="<%=uurl%>" alt="">
+          </div>
+
           <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control" name="listing[image]"  value="<%=details.image%>" required >
-            <div class="invalid-feedback">Image should be valid</div>
-            <div class="valid-feedback">Image to be added</div>
+            <input type="file" class="form-control" name="listing[image]"  >
+            
           </div>
          
           <div class="mb-3">
             <label for="location" class="form-label">Location</label>
-            <input type="text" class="form-control" name="listing[location] "  value="<%=details.location%>" required>
+            <input type="text" class="form-control" name="listing[location]"  value="<%=details.location%>" required>
             <div class="invalid-feedback">Location should be valid</div>
             <div class="valid-feedback">Well located</div>
           </div>
