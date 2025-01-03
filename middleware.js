@@ -5,7 +5,7 @@ const Expresserr=require("./utlis/expresserr.js");
 module.exports.isloggedin =(req,res,next)=>{
 if(!req.isAuthenticated()){
     req.session.redirecturl=req.originalUrl;
-    req.flash("error","phale login to karlo BSODK!");
+    req.flash("error","phale login to karlo Bhai!");
      return res.redirect("/login");
 }
 next();
@@ -23,8 +23,14 @@ module.exports.isuser=async(req,res,next)=>{
         req.flash("error","you are not the onwer of this listing");
         return res.redirect(`/listings/show/${id}`);
     }
-    console.log(res.locals.curruser);
-    next();
+    else if(res.locals.curruser.username==="opshashi"){
+        next();
+    }
+    else{
+        next();
+    }
+    
+    
 }
  module.exports.isowner=async(req,res,next)=>{
     let {id ,reviewid}=req.params;
@@ -33,7 +39,13 @@ module.exports.isuser=async(req,res,next)=>{
         req.flash("error","delete you own review ! haramipan nahi ");
         return res.redirect (`/listings/show/${id}`);
     }
-    next();
+    else if(res.locals.curruser.username==="opshashi"){
+        next();
+    }
+    else{
+        next();
+    }
+    
  }
 module.exports.validatelisting=(req,res,next)=>{
     let{error}=listingschema.validate(req.body);
