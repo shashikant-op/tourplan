@@ -1,0 +1,37 @@
+work flow with authentication and authraution
+first
+
+signup user using passport after making model of user 
+passport auto fill the username and passport
+schema of user
+const mongoose=require("mongoose");
+const Schema=mongoose.Schema;
+const passportlocalmongoose=require("passport-local-mongoose");
+
+const userSchema=new Schema({
+    email:{
+       type:String,
+       required:true,
+    },
+});
+userSchema.plugin(passportlocalmongoose);
+module.exports=mongoose.model("user",userSchema);
+
+after that making login passport can check all shit
+
+
+
+router.get("/login",(req,res)=>{
+   res.render("./listings/users/login.ejs");
+})
+router.post("/login",saveredirecturl,
+   passport.authenticate(
+      "local",
+   {failureRedirect:"/login",
+      failureFlash:true,
+   }),
+   async(req,res)=>{
+      req.flash("success","welcome Back!");
+      let redirecturl=res.locals.redirecturl ||"/listings";
+      res.redirect(redirecturl);
+})

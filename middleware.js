@@ -23,6 +23,7 @@ module.exports.isuser=async(req,res,next)=>{
         req.flash("error","you are not the onwer of this listing");
         return res.redirect(`/listings/show/${id}`);
     }
+    console.log(res.locals.curruser);
     next();
 }
  module.exports.isowner=async(req,res,next)=>{
